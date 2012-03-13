@@ -1,15 +1,14 @@
 -#  This file is app/views/movies/index.html.haml
 %h1 All Movies
-
 %table#movies
   %thead
     %tr
-      %th Movie Title
+      %th{:id => 'title_header', :class => helper_class('title')}= link_to "Movie Title", movies_path(:sort=>'title')
       %th Rating
-      %th Release Date
+      %th{:id => 'release_date_header', :class => helper_class('release') }= link_to "Release Date", movies_path(:sort=>'release')
       %th More Info
   %tbody
-    - @movies.each do |movie|
+    - @movies.sort_by{|a| helper_sort(a)}.each do |movie|
       %tr
         %td= movie.title 
         %td= movie.rating
